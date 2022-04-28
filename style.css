@@ -9097,3 +9097,22 @@ a:hover {
   color: #339900;
   text-decoration: underline;
 }
+
+.downloadicon {
+  margin: 5px 5px;
+  background-color: #434e5e;
+  color: whitesmoke;
+  border-color: whitesmoke;
+}
+
+.downloadicon:hover {
+  transform: scale(1.1);
+}
+
+.downloadicon:active {
+  transform: translateY(2px);
+}
+
+.customIcons {
+  text-decoration: none;
+}
