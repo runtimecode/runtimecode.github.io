@@ -1,5 +1,4 @@
 import "./App.css";
-import { lightTheme, Provider } from "@adobe/react-spectrum";
 
 import Header from "./components/header/Header";
 import Nav from "./components/nav/Nav";
@@ -13,7 +12,7 @@ import Footer from "./components/footer/Footer";
 
 function App() {
   return (
-    <Provider theme={lightTheme} colorScheme="light">
+    <>
       <Header />
       <Nav />
       <About />
@@ -23,7 +22,7 @@ function App() {
       <Testimonials />
       <Contact />
       <Footer />
-    </Provider>
+    </>
   );
 }
 
