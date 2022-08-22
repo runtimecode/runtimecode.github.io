@@ -27,20 +27,22 @@ const About = () => {
             </article>
             <article className="about__card">
               <FiUsers className="about__icon" />
-              <h5>Clients</h5>
-              <small>200+ Worldwide</small>
+              <h5>Architect</h5>
+              <small>7+ Years of experience</small>
             </article>
             <article className="about__card">
               <VscFolderLibrary className="about__icon" />
-              <h5>Projects</h5>
-              <small>80+ projects</small>
+              <h5>Lead</h5>
+              <small>15+ highly skilled member team</small>
             </article>
           </div>
           <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book.
+            Software developer with 11+ years of experience and broad knowledge
+            of engineering and software technology. In-depth knowledge of
+            design, development, and sustenance of product systems and
+            subsystems. Strictly adhered to time schedules and successfully
+            accomplished engineering and organizational mission. Currently
+            working as a Computer Scientist at Adobe Systems Inc.
           </p>
 
           <a href="#contact" className="btn btn-primary">
