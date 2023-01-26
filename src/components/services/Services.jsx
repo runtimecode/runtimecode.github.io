@@ -9,10 +9,34 @@ const Services = () => {
       <h2>My Experiences</h2>
 
       <div className="container services__container">
+
+      <article className="service">
+          <div className="service__head">
+            <h3>Amazon Inc.</h3>
+            <h5>SDE | September 2022 - Present</h5>
+          </div>
+
+          <div className="service__list">
+            <li>
+              <BiCheck className="service__list-icon" />
+              <p>
+              Developing next generation end to end customer notifications for the Supply chain portal (SCP)
+              </p>
+            </li>
+            <li>
+              <BiCheck className="service__list-icon" />
+              <p>
+              Implementating datahandling solutions to the customer data
+              </p>
+            </li>
+          </div>
+        </article>
+
+
         <article className="service">
           <div className="service__head">
             <h3>Adobe Systems Inc.</h3>
-            <h5>Computer Scientist | October 2017 - Present</h5>
+            <h5>Computer Scientist | October 2017 - September 2022</h5>
           </div>
 
           <div className="service__list">
@@ -21,14 +45,6 @@ const Services = () => {
               <p>
                 Developed new Adobe localization Framework toolkit to translate
                 all Adobe Products
-              </p>
-            </li>
-            <li>
-              <BiCheck className="service__list-icon" />
-              <p>
-                Developed automatic linguistic bug creation and fix for
-                linguistic error and generated reporting dashboard, which
-                improved bug fixing significantly.
               </p>
             </li>
             <li>
