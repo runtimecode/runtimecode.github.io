@@ -4,7 +4,7 @@ import { BsLinkedin } from "react-icons/bs";
 import { FaGithub } from "react-icons/fa";
 import { BsFillFileEarmarkPdfFill } from "react-icons/bs";
 
-import CV from "../../assets/Prabhat_Kumar_10_Years_dev.pdf";
+import CV from "../../assets/Prabhat_Kumar_12_Years_dev.pdf";
 
 const HeaderSocials = () => {
   return (
