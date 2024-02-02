@@ -12,8 +12,30 @@ const Services = () => {
 
       <article className="service">
           <div className="service__head">
+            <h3>Autodesk Inc.</h3>
+            <h5>Principal Engineer | January 2024 - Present</h5>
+          </div>
+
+          <div className="service__list">
+            <li>
+              <BiCheck className="service__list-icon" />
+              <p>
+              Leading Software products and services for the architecture, engineering, construction, manufacturing, me-dia, education, and entertainment industries
+              </p>
+            </li>
+            <li>
+              <BiCheck className="service__list-icon" />
+              <p>
+                Re-Architecting from monolith design to microservices
+              </p>
+            </li>
+          </div>
+        </article>
+
+      <article className="service">
+          <div className="service__head">
             <h3>Amazon Inc.</h3>
-            <h5>SDE | September 2022 - Present</h5>
+            <h5>SDE | September 2022 - January 2024</h5>
           </div>
 
           <div className="service__list">

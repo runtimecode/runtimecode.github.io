@@ -47,7 +47,7 @@ const Footer = () => {
 
       <div className="footer__copyright">
         <small>
-          &copy; Prabhat Kumar | Computer Scientist | Adobe Systems inc
+          &copy; Prabhat Kumar | Principal Engineer | Autodesk inc.
         </small>
       </div>
     </footer>

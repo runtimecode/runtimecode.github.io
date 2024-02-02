@@ -23,7 +23,7 @@ const About = () => {
             <article className="about__card">
               <FaAward className="about__icon" />
               <h5>Experience</h5>
-              <small>11+ Years of experience</small>
+              <small>13+ Years of experience</small>
             </article>
             <article className="about__card">
               <FiUsers className="about__icon" />
@@ -37,12 +37,7 @@ const About = () => {
             </article>
           </div>
           <p>
-            Software developer with 11+ years of experience and broad knowledge
-            of engineering and software technology. In-depth knowledge of
-            design, development, and sustenance of product systems and
-            subsystems. Strictly adhered to time schedules and successfully
-            accomplished engineering and organizational mission. Currently
-            working as a Computer Scientist at Adobe Systems Inc.
+          I have 13 years of experience in software development, I bring a comprehensive understanding of engineering and software development. My expertise lies in designing, developing, and maintaining high-performance product systems, subsystems and teams at scale. I am leading a cross-functional team. I excel in meeting strict deadlines and achieving engineering and organizational goals efficiently. Presently, I am employed at Autodesk Inc. leading a team of 7 highly skilled engineers.
           </p>
 
           <a href="#contact" className="btn btn-primary">
