@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/static/css/main.b37b0dd3.css",
-    "main.js": "/static/js/main.f347ce43.js",
+    "main.js": "/static/js/main.c507865a.js",
     "static/media/2.png": "/static/media/2.e8c7c7dd6ac73cc3434f.png",
     "static/media/1.png": "/static/media/1.b369b34b954223a72e8d.png",
     "static/media/Prabhat_Kumar_12_Years_dev.pdf": "/static/media/Prabhat_Kumar_12_Years_dev.ced9ce8cc5fdafed7871.pdf",
     "static/media/5.jpg": "/static/media/5.18d1ea8caf916fbcbae3.jpg",
     "index.html": "/index.html",
     "main.b37b0dd3.css.map": "/static/css/main.b37b0dd3.css.map",
-    "main.f347ce43.js.map": "/static/js/main.f347ce43.js.map"
+    "main.c507865a.js.map": "/static/js/main.c507865a.js.map"
   },
   "entrypoints": [
     "static/css/main.b37b0dd3.css",
-    "static/js/main.f347ce43.js"
+    "static/js/main.c507865a.js"
   ]
 }
