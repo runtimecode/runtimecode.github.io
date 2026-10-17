@@ -1,26 +1,84 @@
+import { useState } from "react";
 import "./App.css";
 
 const experience = [
   {
     company: "Autodesk Inc",
     role: "Manager, Software Development",
+    product: "Fusion 360",
     period: "Jan 2024 - Present",
-    highlight:
-      "Leading product and platform engineering for Fusion 360, overseeing multiple teams and cloud-native service delivery for 2M+ monthly active users.",
+    description:
+      "Design and engineering software serving architecture, construction, manufacturing, media, education, and entertainment industries.",
+    highlights: [
+      "Lead a 21-member team building products and services for more than 2M monthly active users.",
+      "Architect and deliver cloud-native backend services and enterprise apps with Java, Spring Boot, React, and Angular.",
+      "Drive delivery from architecture through production, mentoring engineers and staying hands-on with reviews, debugging, and implementation.",
+      "Partner with product and global engineering teams to shape the roadmap and platform direction.",
+    ],
   },
   {
     company: "Amazon Inc",
-    role: "SDE, Buy with Prime",
+    role: "Software Development Engineer",
+    product: "Buy with Prime / Multi-Channel Fulfillment",
     period: "Sep 2022 - Jan 2024",
-    highlight:
-      "Built customer notification and fulfillment workflows for commerce-scale infrastructure, improving operational visibility and distributed system performance.",
+    description:
+      "Multi-Channel Fulfillment extends Amazon's fulfillment network to orders placed on other sales channels, with trackable delivery from fulfillment center to customer.",
+    highlights: [
+      "Designed the customer notification platform for Multi-Channel Fulfillment.",
+      "Built scalable backend services in Node.js and Java, plus Angular interfaces for supply-chain workflows.",
+      "Developed APIs for fulfillment events across large-scale distributed systems.",
+      "Improved customer data pipelines and operational visibility with distributed engineering teams.",
+    ],
   },
   {
     company: "Adobe Systems India Inc",
-    role: "Computer Scientist, Internationalization",
+    role: "Computer Scientist",
+    product: "Internationalization and Localization",
     period: "Oct 2017 - Sep 2022",
-    highlight:
-      "Created automation for localization workflows and introduced AI-assisted translation and quality improvements across global product lines.",
+    description:
+      "Internationalization prepares applications for different languages and regions; localization adapts them to each market.",
+    highlights: [
+      "Built the Adobe Localization Framework in Node.js and AngularJS, automating translation workflows across dozens of languages.",
+      "Reduced localization cycle time by 40% and standardized workflows across product lines.",
+      "Automated help-document translation from Markdown to improve documentation turnaround.",
+      "Partnered with research teams on NLP-based translation quality evaluation, bringing AI into localization pipelines.",
+    ],
+  },
+  {
+    company: "Times Internet Ltd (Times of India Group)",
+    role: "Manager, Level I",
+    product: "Colombia",
+    period: "Jun 2016 - Oct 2017",
+    description:
+      "Real-time marketing platform matching offers to digital audiences across Times Internet properties and partner publishers, processing billions of requests daily and reaching nearly 200M users monthly.",
+    highlights: [
+      "Developed a self-service portal for the ad-serving platform.",
+      "Created multiple ad formats to optimize and improve ad consumption.",
+    ],
+  },
+  {
+    company: "SSN Logistics Pvt Ltd (Delhivery)",
+    role: "Senior Associate, Technology",
+    product: "LMAP (Last Mile as a Product)",
+    period: "Nov 2015 - Jun 2016",
+    description:
+      "Developed a web app for LMAP, separating last-mile workflows into a product to improve performance and reduce risk.",
+    highlights: [
+      "Designed logistics workflows for last-mile package delivery.",
+      "Integrated multiple carrier services and built scalable backend services.",
+      "Optimized routing and package tracking for high-volume shipment processing.",
+    ],
+  },
+  {
+    company: "Wipro Technologies Ltd",
+    role: "Senior Software Engineer",
+    product: "InSite",
+    period: "Apr 2011 - Nov 2015",
+    description:
+      "Real-time data management for collecting, transmitting, replicating, and managing drilling and rig-site data.",
+    highlights: [
+      "Developed the next-generation InSite platform and the first prototype of the InSite Anywhere web product.",
+    ],
   },
 ];
 
@@ -46,6 +104,8 @@ const skills = [
 ];
 
 function App() {
+  const [expandedExperiences, setExpandedExperiences] = useState({});
+
   return (
     <div className="portfolio-shell">
       <header className="site-topbar">
@@ -66,7 +126,7 @@ function App() {
               />
               <p className="section-kicker">About me</p>
               <h1>Prabhat Kumar</h1>
-              <p className="profile-role">Senior software engineering leader</p>
+              <p className="profile-role">Manager Software Engineering</p>
               <p className="profile-summary">
                 Senior software engineering leader with 16+ years of experience
                 delivering enterprise SaaS platforms across Autodesk, Amazon, Adobe,
@@ -95,23 +155,51 @@ function App() {
                 <p className="section-kicker">Career</p>
                 <h2>Experience</h2>
               </div>
-              <span className="panel-index">01</span>
             </div>
 
-            <div className="experience-list">
-              {experience.map((item, index) => (
-                <article key={item.company} className="experience-entry">
-                  <p className="experience-period">{item.period}</p>
-                  <div className="experience-detail">
-                    <span className="experience-marker" aria-hidden="true">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <h3>{item.role}</h3>
-                    <p className="experience-company">{item.company}</p>
-                    <p className="experience-summary">{item.highlight}</p>
-                  </div>
-                </article>
-              ))}
+            <div className="experience-list" id="experience-list">
+              {experience.map((item, index) => {
+                const isExpanded = Boolean(expandedExperiences[item.company]);
+                const highlightsId = `experience-highlights-${index}`;
+
+                return (
+                  <article key={item.company} className="experience-entry">
+                    <p className="experience-period">{item.period}</p>
+                    <div className="experience-detail">
+                      <div className="experience-title-row">
+                        <h3>{item.role}</h3>
+                        <button
+                          className="show-more-button experience-toggle"
+                          type="button"
+                          aria-expanded={isExpanded}
+                          aria-controls={highlightsId}
+                          onClick={() =>
+                            setExpandedExperiences((previous) => ({
+                              ...previous,
+                              [item.company]: !previous[item.company],
+                            }))
+                          }
+                        >
+                          {isExpanded ? "Show less" : "Show more"}
+                        </button>
+                      </div>
+                      <p className="experience-company">
+                        {item.company} <span>{item.product}</span>
+                      </p>
+                      <p className="experience-summary">{item.description}</p>
+                      <ul
+                        className="experience-highlights"
+                        id={highlightsId}
+                        hidden={!isExpanded}
+                      >
+                        {item.highlights.map((highlight) => (
+                          <li key={highlight}>{highlight}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           </section>
 
@@ -121,7 +209,6 @@ function App() {
                 <p className="section-kicker">Toolbox</p>
                 <h2>Skills &amp; capabilities</h2>
               </div>
-              <span className="panel-index">02</span>
             </div>
             <div className="skill-list">
               {skills.map((skill) => (
@@ -136,7 +223,6 @@ function App() {
                 <p className="section-kicker">Background</p>
                 <h2>Education</h2>
               </div>
-              <span className="panel-index">03</span>
             </div>
             <div className="education-list">
               <article className="education-entry">
