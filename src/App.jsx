@@ -4,23 +4,23 @@ const experience = [
   {
     company: "Autodesk Inc",
     role: "Manager, Software Development",
-    period: "January 2024 - Present",
+    period: "Jan 2024 - Present",
     highlight:
-      "Leading multiple engineering teams for Fusion 360 with 2M+ monthly active users and driving architecture, delivery, and mentoring across distributed platform services.",
+      "Leading product and platform engineering for Fusion 360, overseeing multiple teams and cloud-native service delivery for 2M+ monthly active users.",
   },
   {
     company: "Amazon Inc",
     role: "SDE, Buy with Prime",
-    period: "September 2022 - January 2024",
+    period: "Sep 2022 - Jan 2024",
     highlight:
-      "Built customer notification and fulfillment workflows for large-scale commerce infrastructure, supporting distributed systems and operational visibility at scale.",
+      "Built customer notification and fulfillment workflows for commerce-scale infrastructure, improving operational visibility and distributed system performance.",
   },
   {
     company: "Adobe Systems India Inc",
     role: "Computer Scientist, Internationalization",
-    period: "October 2017 - September 2022",
+    period: "Oct 2017 - Sep 2022",
     highlight:
-      "Created the Adobe Localization Framework, reduced localization cycle time by 40%, and introduced AI-assisted workflows to improve automation and translation quality.",
+      "Created automation for localization workflows and introduced AI-assisted translation and quality improvements across global product lines.",
   },
 ];
 
@@ -48,142 +48,119 @@ const skills = [
 function App() {
   return (
     <div className="portfolio-shell">
-      <header className="topbar">
-        <div className="brand">Prabhat Kumar</div>
-        <nav className="nav">
-          <a href="#about">About</a>
-          <a href="#experience">Experience</a>
-          <a href="#skills">Skills</a>
-          <a href="#contact">Contact</a>
-        </nav>
+      <header className="site-topbar">
+        <a className="site-wordmark" href="#top">Prabhat Kumar</a>
+        <a className="topbar-contact" href="mailto:kmrprabhat@outlook.com">
+          Get in touch <span aria-hidden="true">↗</span>
+        </a>
       </header>
 
-      <main className="page">
-        <section className="hero section-card">
-          <div className="hero-copy">
-            <p className="eyebrow">Engineering Leader | Full Stack Architect</p>
-            <h1>Building scalable products for modern digital businesses.</h1>
-            <p className="lead">
-              Senior software engineering leader with 16+ years of experience
-              designing and delivering enterprise SaaS platforms across Autodesk,
-              Amazon, Adobe, Times Internet, Delhivery, and Wipro.
-            </p>
-
-            <div className="hero-actions">
-              <a className="primary-btn" href="mailto:kmrprabhat@outlook.com">
-                Email me
+      <div className="portfolio-layout" id="top">
+        <aside className="profile-column" aria-label="Profile">
+          <section className="profile-panel">
+            <div className="profile-content">
+              <img
+                className="profile-illustration"
+                src="/profile-illustration.png"
+                alt="Illustration of a bearded developer working at a laptop"
+              />
+              <p className="section-kicker">About me</p>
+              <h1>Prabhat Kumar</h1>
+              <p className="profile-role">Senior software engineering leader</p>
+              <p className="profile-summary">
+                Senior software engineering leader with 16+ years of experience
+                delivering enterprise SaaS platforms across Autodesk, Amazon, Adobe,
+                Times Internet, Delhivery, and Wipro.
+              </p>
+              <div className="profile-details">
+                <p>Leading teams and building cloud-native products</p>
+                <p>Experience across 2M+ monthly active users</p>
+              </div>
+            </div>
+            <div className="profile-actions">
+              <a className="profile-primary-link" href="mailto:kmrprabhat@outlook.com">
+                Email me <span aria-hidden="true">↗</span>
               </a>
-              <a className="secondary-btn" href="#experience">
-                View experience
+              <a className="profile-secondary-link" href="#experience">
+                Explore experience
               </a>
             </div>
+          </section>
+        </aside>
 
-            <ul className="mini-stats" aria-label="Professional summary">
-              <li>
-                <strong>16+</strong>
-                <span>Years experience</span>
-              </li>
-              <li>
-                <strong>2M+</strong>
-                <span>Users managed</span>
-              </li>
-              <li>
-                <strong>8</strong>
-                <span>Industry domains</span>
-              </li>
-            </ul>
-          </div>
-
-          <aside className="hero-panel">
-            <div className="panel-badge">Currently</div>
-            <h2>Manager, Software Development</h2>
-            <p>Autodesk Fusion 360</p>
-            <div className="panel-list">
-              <span>Cloud-native architecture</span>
-              <span>Product strategy</span>
-              <span>AI-assisted delivery</span>
-              <span>Platform leadership</span>
+        <main className="main-column">
+          <section id="experience" className="content-panel">
+            <div className="panel-heading">
+              <div>
+                <p className="section-kicker">Career</p>
+                <h2>Experience</h2>
+              </div>
+              <span className="panel-index">01</span>
             </div>
-          </aside>
-        </section>
 
-        <section id="about" className="about section-card">
-          <div className="section-heading">
-            <p className="eyebrow">About</p>
-            <h2>Technology leader focused on scale, product quality, and execution.</h2>
-          </div>
-          <p>
-            I lead engineering teams and build cloud-native systems that balance
-            product ambition with operational reliability. My work spans backend,
-            frontend, APIs, distributed systems, localization, and AI-assisted
-            product development.
-          </p>
-        </section>
-
-        <section id="experience" className="experience section-card">
-          <div className="section-heading">
-            <p className="eyebrow">Experience</p>
-            <h2>Career highlights</h2>
-          </div>
-
-          <div className="timeline">
-            {experience.map((item) => (
-              <article key={item.company} className="timeline-item">
-                <div className="timeline-dot" aria-hidden="true" />
-                <div className="timeline-content">
-                  <div className="timeline-topline">
+            <div className="experience-list">
+              {experience.map((item, index) => (
+                <article key={item.company} className="experience-entry">
+                  <p className="experience-period">{item.period}</p>
+                  <div className="experience-detail">
+                    <span className="experience-marker" aria-hidden="true">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
                     <h3>{item.role}</h3>
-                    <span>{item.period}</span>
+                    <p className="experience-company">{item.company}</p>
+                    <p className="experience-summary">{item.highlight}</p>
                   </div>
-                  <p className="company-name">{item.company}</p>
-                  <p>{item.highlight}</p>
-                </div>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section id="skills" className="content-panel">
+            <div className="panel-heading">
+              <div>
+                <p className="section-kicker">Toolbox</p>
+                <h2>Skills &amp; capabilities</h2>
+              </div>
+              <span className="panel-index">02</span>
+            </div>
+            <div className="skill-list">
+              {skills.map((skill) => (
+                <span key={skill} className="skill-item">{skill}</span>
+              ))}
+            </div>
+          </section>
+
+          <section className="content-panel education-panel">
+            <div className="panel-heading">
+              <div>
+                <p className="section-kicker">Background</p>
+                <h2>Education</h2>
+              </div>
+              <span className="panel-index">03</span>
+            </div>
+            <div className="education-list">
+              <article className="education-entry">
+                <h3>Bachelor of Engineering</h3>
+                <p>Electronics and Communication</p>
+                <span>Birla Institute of Technology, Mesra (Ranchi)</span>
               </article>
-            ))}
-          </div>
-        </section>
-
-        <section id="skills" className="skills section-card">
-          <div className="section-heading">
-            <p className="eyebrow">Skills</p>
-            <h2>Capabilities</h2>
-          </div>
-
-          <div className="chip-grid">
-            {skills.map((skill) => (
-              <span key={skill} className="chip">
-                {skill}
-              </span>
-            ))}
-          </div>
-        </section>
-
-        <section className="education section-card">
-          <div className="section-heading">
-            <p className="eyebrow">Education</p>
-            <h2>Academic background</h2>
-          </div>
-
-          <div className="education-grid">
-            <div>
-              <h3>Bachelor of Engineering</h3>
-              <p>Electronics and Communication</p>
-              <p>Birla Institute of Technology, Mesra (Ranchi)</p>
+              <article className="education-entry">
+                <h3>Senior Secondary</h3>
+                <p>Science + Mathematics</p>
+                <span>Shri Mahaveer Digambar Jain, Jaipur</span>
+              </article>
             </div>
-            <div>
-              <h3>Senior Secondary</h3>
-              <p>Science + Mathematics</p>
-              <p>Shri Mahaveer Digambar Jain, Jaipur</p>
-            </div>
-          </div>
-        </section>
-      </main>
+          </section>
 
-      <footer id="contact" className="footer section-card">
-        <p className="eyebrow">Contact</p>
-        <h2>Let’s build something meaningful.</h2>
-        <a href="mailto:kmrprabhat@outlook.com">kmrprabhat@outlook.com</a>
-      </footer>
+          <footer id="contact" className="contact-panel">
+            <p className="section-kicker">Contact</p>
+            <h2>Have a good challenge in mind?</h2>
+            <a href="mailto:kmrprabhat@outlook.com">
+              kmrprabhat@outlook.com <span aria-hidden="true">↗</span>
+            </a>
+          </footer>
+        </main>
+      </div>
     </div>
   );
 }
