@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import ArticlePage from "./ArticlePage";
 import WorkingWithMe from "./WorkingWithMe";
+import articles from "./articles";
 
 const experience = [
   {
@@ -150,21 +152,33 @@ const skills = [
 
 function App() {
   const [expandedExperiences, setExpandedExperiences] = useState({});
-  const [showWorkingWithMe, setShowWorkingWithMe] = useState(
-    window.location.hash === "#working-with-me"
-  );
+  const [currentHash, setCurrentHash] = useState(window.location.hash);
 
   useEffect(() => {
     const updatePage = () => {
-      setShowWorkingWithMe(window.location.hash === "#working-with-me");
+      setCurrentHash(window.location.hash);
     };
 
     window.addEventListener("hashchange", updatePage);
     return () => window.removeEventListener("hashchange", updatePage);
   }, []);
 
-  if (showWorkingWithMe) {
+  useEffect(() => {
+    if (currentHash === "#working-with-me" || currentHash.startsWith("#/articles/")) {
+      window.scrollTo(0, 0);
+    } else if (currentHash === "#article-ideas") {
+      document.getElementById("article-ideas")?.scrollIntoView();
+    }
+  }, [currentHash]);
+
+  if (currentHash === "#working-with-me") {
     return <WorkingWithMe />;
+  }
+
+  if (currentHash.startsWith("#/articles/")) {
+    const slug = currentHash.slice("#/articles/".length);
+    const article = articles.find((item) => item.slug === slug);
+    return <ArticlePage article={article} />;
   }
 
   return (
@@ -264,6 +278,46 @@ function App() {
                   <p className="selected-work-context">{item.context}</p>
                   <p className="selected-work-contribution">{item.contribution}</p>
                   <p className="selected-work-evidence">{item.evidence}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section id="article-ideas" className="content-panel">
+            <div className="panel-heading">
+              <div>
+                <p className="section-kicker">Articles</p>
+                <h2>Technical writing</h2>
+              </div>
+            </div>
+            <p className="article-ideas-intro">
+              First-draft articles on system design, AI, localization, and
+              engineering leadership. Each article has its own page and is open
+              for review.
+            </p>
+            <div className="article-ideas-list">
+              {articles.map((article) => (
+                <article className="article-idea-card" key={article.slug}>
+                  <p className="article-idea-category">{article.category}</p>
+                  <h3>
+                    <a
+                      href={`#/articles/${article.slug}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {article.title}
+                    </a>
+                  </h3>
+                  <p>{article.summary}</p>
+                  <a
+                    className="article-card-link"
+                    href={`#/articles/${article.slug}`}
+                    aria-label={`Read more: ${article.title}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Read more <span aria-hidden="true">↗</span>
+                  </a>
                 </article>
               ))}
             </div>
