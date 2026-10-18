@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import articles from "./articles";
 
 function getReadingTime(article) {
   const text = article.sections
@@ -9,7 +8,7 @@ function getReadingTime(article) {
   return `${Math.max(1, Math.ceil(wordCount / 220))} min read`;
 }
 
-function ArticlePage({ article }) {
+function ArticlePage({ article, articles }) {
   useEffect(() => {
     const previousTitle = document.title;
     const descriptionMeta = document.querySelector('meta[name="description"]');
@@ -57,7 +56,7 @@ function ArticlePage({ article }) {
       <header className="site-topbar">
         <a className="site-wordmark" href="#top">Prabhat Kumar</a>
         <nav className="topbar-links" aria-label="Main navigation">
-          <a className="article-nav-link" href="#article-ideas">All articles</a>
+          <a className="article-nav-link" href="#articles">All articles</a>
           <a className="topbar-guide-link" href="#working-with-me">Working with me</a>
           <a className="topbar-contact" href="mailto:kmrprabhat@outlook.com">
             Get in touch <span aria-hidden="true">↗</span>
@@ -68,7 +67,7 @@ function ArticlePage({ article }) {
       <main className="article-layout">
         <article className="article-main">
           <header className="article-header content-panel">
-            <a className="article-breadcrumb" href="#article-ideas">
+            <a className="article-breadcrumb" href="#articles">
               ← All articles
             </a>
             <p className="article-category">{article.category}</p>
@@ -77,7 +76,7 @@ function ArticlePage({ article }) {
             <div className="article-byline">
               <span>By Prabhat Kumar</span>
               <span aria-hidden="true">·</span>
-              <span>Draft for review</span>
+              <span>Published</span>
               <span aria-hidden="true">·</span>
               <span>{getReadingTime(article)}</span>
             </div>
@@ -147,9 +146,8 @@ function ArticlePage({ article }) {
               </ul>
             </section>
             <p className="article-draft-note">
-              This is a working draft. The examples and recommendations are
-              intended as a starting point for discussion and should be adapted
-              to each system and team.
+              The examples and recommendations are intended as a starting point
+              for discussion and should be adapted to each system and team.
             </p>
           </div>
 
@@ -178,8 +176,8 @@ function ArticlePage({ article }) {
           </section>
 
           <footer className="article-footer">
-            <a className="profile-secondary-link" href="#article-ideas">
-              Browse all article drafts
+            <a className="profile-secondary-link" href="#articles">
+              Browse all articles
             </a>
             <a href="#top">Back to homepage</a>
           </footer>

@@ -1,8 +1,16 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import ArticleAdmin from "./ArticleAdmin";
+import ArticleArchive from "./ArticleArchive";
 import ArticlePage from "./ArticlePage";
 import WorkingWithMe from "./WorkingWithMe";
 import articles from "./articles";
+import {
+  mergeArticleOverrides,
+  readArticleOverrides,
+  saveArticleOverrides,
+  sortArticlesNewestFirst,
+} from "./articleStorage";
 
 const experience = [
   {
@@ -150,9 +158,21 @@ const skills = [
   "Distributed Systems",
 ];
 
+function isLocalhost() {
+  return ["localhost", "127.0.0.1", "::1", "[::1]"].includes(
+    window.location.hostname
+  );
+}
+
 function App() {
   const [expandedExperiences, setExpandedExperiences] = useState({});
   const [currentHash, setCurrentHash] = useState(window.location.hash);
+  const [articleStorage, setArticleStorage] = useState(readArticleOverrides);
+  const showArticleAdmin = isLocalhost();
+  const allArticles = sortArticlesNewestFirst(
+    mergeArticleOverrides(articles, articleStorage.overrides)
+  );
+  const visibleArticles = allArticles.filter((article) => article.visible !== false);
 
   useEffect(() => {
     const updatePage = () => {
@@ -164,7 +184,12 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (currentHash === "#working-with-me" || currentHash.startsWith("#/articles/")) {
+    if (
+      currentHash === "#working-with-me" ||
+      currentHash === "#article-admin" ||
+      currentHash === "#articles" ||
+      currentHash.startsWith("#/articles/")
+    ) {
       window.scrollTo(0, 0);
     } else if (currentHash === "#article-ideas") {
       document.getElementById("article-ideas")?.scrollIntoView();
@@ -175,10 +200,38 @@ function App() {
     return <WorkingWithMe />;
   }
 
+  if (currentHash === "#article-admin" && showArticleAdmin) {
+    return (
+      <ArticleAdmin
+        articles={allArticles}
+        onSave={(overrides) => {
+          const error = saveArticleOverrides(overrides);
+          if (error) {
+            setArticleStorage((current) => ({ ...current, error }));
+            return error;
+          }
+          setArticleStorage({ overrides, error: "" });
+          return "";
+        }}
+        overrides={articleStorage.overrides}
+        storageError={articleStorage.error}
+      />
+    );
+  }
+
+  if (currentHash === "#articles") {
+    return (
+      <ArticleArchive
+        articles={visibleArticles}
+        showArticleAdmin={showArticleAdmin}
+      />
+    );
+  }
+
   if (currentHash.startsWith("#/articles/")) {
     const slug = currentHash.slice("#/articles/".length);
-    const article = articles.find((item) => item.slug === slug);
-    return <ArticlePage article={article} />;
+    const article = visibleArticles.find((item) => item.slug === slug);
+    return <ArticlePage article={article} articles={visibleArticles} />;
   }
 
   return (
@@ -289,14 +342,23 @@ function App() {
                 <p className="section-kicker">Articles</p>
                 <h2>Technical writing</h2>
               </div>
+              <div className="article-list-actions">
+                <a className="article-all-link" href="#articles">
+                  All articles <span aria-hidden="true">↗</span>
+                </a>
+                {showArticleAdmin && (
+                  <a className="article-admin-home-link" href="#article-admin">
+                    Manage articles
+                  </a>
+                )}
+              </div>
             </div>
             <p className="article-ideas-intro">
-              First-draft articles on system design, AI, localization, and
-              engineering leadership. Each article has its own page and is open
-              for review.
+              Articles on system design, AI, localization, and engineering
+              leadership. Each article has its own dedicated page.
             </p>
             <div className="article-ideas-list">
-              {articles.map((article) => (
+              {visibleArticles.slice(0, 6).map((article) => (
                 <article className="article-idea-card" key={article.slug}>
                   <p className="article-idea-category">{article.category}</p>
                   <h3>
