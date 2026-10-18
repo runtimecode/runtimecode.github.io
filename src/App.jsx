@@ -25,7 +25,7 @@ const experience = [
     description:
       "Multi-Channel Fulfillment extends Amazon's fulfillment network to orders placed on other sales channels, with trackable delivery from fulfillment center to customer.",
     highlights: [
-      "Designed the customer notification platform for Multi-Channel Fulfillment.",
+      "Redesigned the customer notification platform for Multi-Channel Fulfillment.",
       "Built scalable backend services in Node.js and Java, plus Angular interfaces for supply-chain workflows.",
       "Developed APIs for fulfillment events across large-scale distributed systems.",
       "Improved customer data pipelines and operational visibility with distributed engineering teams.",
@@ -83,7 +83,51 @@ const experience = [
   },
 ];
 
+const selectedWork = [
+  {
+    organization: "Autodesk · Fusion 360",
+    title: "Leading a team building products at scale",
+    context:
+      "Products and services support more than 2M monthly active users across design and engineering workflows.",
+    contribution:
+      "Lead a 21-member team, deliver cloud-native services and enterprise applications, and partner with product and global engineering teams on roadmap and platform direction.",
+    evidence: "21-member team · 2M+ monthly active users",
+  },
+  {
+    organization: "Amazon · Buy with Prime / Multi-Channel Fulfillment",
+    title: "Redesigning the customer notification system",
+    context:
+      "Multi-Channel Fulfillment uses Amazon's fulfillment network for orders placed through merchants' other sales channels.",
+    contribution:
+      "Redesigned the customer notification platform, developed APIs for fulfillment events, and improved customer data pipelines and operational visibility.",
+    evidence: "Customer order notifications · Buy with Prime / MCF",
+  },
+  {
+    organization: "Adobe · Localization",
+    title: "Reducing localization cycle time",
+    context:
+      "Translation workflows needed to support product lines and dozens of languages.",
+    contribution:
+      "Built the Adobe Localization Framework and automated translation workflows, including help-document translation from Markdown.",
+    evidence: "40% reduction in localization cycle time",
+  },
+  {
+    organization: "Times Internet · Colombia",
+    title: "Building for high-volume digital advertising",
+    context:
+      "A real-time marketing platform processed billions of requests daily and reached nearly 200M users monthly.",
+    contribution:
+      "Developed a self-service portal for the ad-serving platform and created multiple ad formats.",
+    evidence: "Billions of requests daily · nearly 200M monthly users",
+  },
+];
+
 const skills = [
+  "Engineering Leadership",
+  "Team Development",
+  "Technical Strategy",
+  "Cross-functional Delivery",
+  "Cloud-native Architecture",
   "Java",
   "Python",
   "Node.js",
@@ -146,7 +190,7 @@ function App() {
               />
               <p className="section-kicker">About me</p>
               <h1>Prabhat Kumar</h1>
-              <p className="profile-role">Manager Software Engineering</p>
+              <p className="profile-role">Manager, Software Engineering</p>
               <p className="profile-summary">
                 Senior software engineering leader with 16+ years of experience
                 delivering enterprise SaaS platforms across Autodesk, Amazon, Adobe,
@@ -169,6 +213,62 @@ function App() {
         </aside>
 
         <main className="main-column">
+          <section className="content-panel portfolio-intro">
+            <p className="section-kicker">Software engineering leadership</p>
+            <h2>Building cloud-native products and teams at scale</h2>
+            <p className="portfolio-intro-summary">
+              I bring 16+ years of experience across engineering and leadership,
+              combining hands-on technical depth with team development, product
+              delivery, and cross-functional partnership.
+            </p>
+            <div className="portfolio-proof-points" aria-label="Career highlights">
+              <div>
+                <strong>16+</strong>
+                <span>years in software engineering</span>
+              </div>
+              <div>
+                <strong>21</strong>
+                <span>people on the team I lead</span>
+              </div>
+              <div>
+                <strong>2M+</strong>
+                <span>monthly active users served</span>
+              </div>
+              <div>
+                <strong>40%</strong>
+                <span>localization cycle-time reduction</span>
+              </div>
+            </div>
+            <div className="portfolio-intro-actions">
+              <a className="profile-primary-link" href="#selected-work">
+                Explore selected work
+              </a>
+              <a className="profile-secondary-link" href="mailto:kmrprabhat@outlook.com">
+                Get in touch
+              </a>
+            </div>
+          </section>
+
+          <section id="selected-work" className="content-panel">
+            <div className="panel-heading">
+              <div>
+                <p className="section-kicker">Selected work</p>
+                <h2>Leadership and delivery in practice</h2>
+              </div>
+            </div>
+            <div className="selected-work-list">
+              {selectedWork.map((item) => (
+                <article className="selected-work-card" key={item.organization}>
+                  <p className="selected-work-organization">{item.organization}</p>
+                  <h3>{item.title}</h3>
+                  <p className="selected-work-context">{item.context}</p>
+                  <p className="selected-work-contribution">{item.contribution}</p>
+                  <p className="selected-work-evidence">{item.evidence}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+
           <section id="experience" className="content-panel">
             <div className="panel-heading">
               <div>
