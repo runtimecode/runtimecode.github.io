@@ -195,8 +195,9 @@ function ArticleAdmin({ articles, overrides, onSave, storageError }) {
               local preview.
             </li>
             <li>
-              Export <code>articles.js</code>, replace <code>src/articles.js</code>,
-              then build and deploy the site to share changes with everyone.
+              Export <code>articles.js</code>, replace{" "}
+              <code>src/articles/articles.js</code>, then build and deploy the
+              site to share changes with everyone.
             </li>
           </ol>
         </section>
@@ -248,8 +249,8 @@ function ArticleAdmin({ articles, overrides, onSave, storageError }) {
             </button>
             {isExported && (
               <p className="article-admin-export-note">
-                Replace <code>src/articles.js</code> with the downloaded file, then
-                deploy to publish.
+                Replace <code>src/articles/articles.js</code> with the downloaded
+                file, then deploy to publish.
               </p>
             )}
           </section>

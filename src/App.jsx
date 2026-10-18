@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import ArticleAdmin from "./ArticleAdmin";
-import ArticleArchive from "./ArticleArchive";
-import ArticlePage from "./ArticlePage";
+import ArticleAdmin from "./articles/ArticleAdmin";
+import ArticleArchive from "./articles/ArticleArchive";
+import ArticlePage from "./articles/ArticlePage";
 import WorkingWithMe from "./WorkingWithMe";
-import articles from "./articles";
+import GameOfLife from "./games/GameOfLife";
+import ProjectArchive from "./projects/ProjectArchive";
+import articles from "./articles/articles";
+import projects, { sortProjectsNewestFirst } from "./projects/projects";
 import {
   mergeArticleOverrides,
   readArticleOverrides,
   saveArticleOverrides,
   sortArticlesNewestFirst,
-} from "./articleStorage";
+} from "./articles/articleStorage";
 
 const experience = [
   {
@@ -169,6 +172,7 @@ function App() {
   const [currentHash, setCurrentHash] = useState(window.location.hash);
   const [articleStorage, setArticleStorage] = useState(readArticleOverrides);
   const showArticleAdmin = isLocalhost();
+  const sortedProjects = sortProjectsNewestFirst(projects);
   const allArticles = sortArticlesNewestFirst(
     mergeArticleOverrides(articles, articleStorage.overrides)
   );
@@ -188,7 +192,9 @@ function App() {
       currentHash === "#working-with-me" ||
       currentHash === "#article-admin" ||
       currentHash === "#articles" ||
-      currentHash.startsWith("#/articles/")
+      currentHash === "#projects" ||
+      currentHash.startsWith("#/articles/") ||
+      currentHash.startsWith("#/projects/")
     ) {
       window.scrollTo(0, 0);
     } else if (currentHash === "#article-ideas") {
@@ -224,6 +230,23 @@ function App() {
       <ArticleArchive
         articles={visibleArticles}
         showArticleAdmin={showArticleAdmin}
+      />
+    );
+  }
+
+  if (currentHash === "#projects") {
+    return <ProjectArchive projects={sortedProjects} />;
+  }
+
+  if (currentHash.startsWith("#/projects/")) {
+    const slug = currentHash.slice("#/projects/".length);
+    const project = sortedProjects.find((item) => item.slug === slug);
+    if (project?.type === "game-of-life") {
+      return <GameOfLife />;
+    }
+    return (
+      <ProjectArchive
+        projects={sortedProjects}
       />
     );
   }
@@ -379,6 +402,40 @@ function App() {
                     rel="noopener noreferrer"
                   >
                     Read more <span aria-hidden="true">↗</span>
+                  </a>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section id="fun-projects" className="content-panel">
+            <div className="panel-heading">
+              <div>
+                <p className="section-kicker">Experiments &amp; play</p>
+                <h2>Fun projects</h2>
+              </div>
+              <a className="article-all-link" href="#projects">
+                All projects <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+            <p className="article-ideas-intro">
+              Small interactive experiments and playful explorations in code.
+            </p>
+            <div className="project-preview-list">
+              {sortedProjects.slice(0, 6).map((project) => (
+                <article className="project-preview-card" key={project.slug}>
+                  <div>
+                    <p className="article-idea-category">{project.category}</p>
+                    <h3>{project.title}</h3>
+                    <p>{project.summary}</p>
+                  </div>
+                  <a
+                    className="article-card-link"
+                    href={`#/projects/${project.slug}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Open project <span aria-hidden="true">↗</span>
                   </a>
                 </article>
               ))}
