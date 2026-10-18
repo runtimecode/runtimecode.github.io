@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
+import WorkingWithMe from "./WorkingWithMe";
 
 const experience = [
   {
@@ -105,14 +106,33 @@ const skills = [
 
 function App() {
   const [expandedExperiences, setExpandedExperiences] = useState({});
+  const [showWorkingWithMe, setShowWorkingWithMe] = useState(
+    window.location.hash === "#working-with-me"
+  );
+
+  useEffect(() => {
+    const updatePage = () => {
+      setShowWorkingWithMe(window.location.hash === "#working-with-me");
+    };
+
+    window.addEventListener("hashchange", updatePage);
+    return () => window.removeEventListener("hashchange", updatePage);
+  }, []);
+
+  if (showWorkingWithMe) {
+    return <WorkingWithMe />;
+  }
 
   return (
     <div className="portfolio-shell">
       <header className="site-topbar">
         <a className="site-wordmark" href="#top">Prabhat Kumar</a>
-        <a className="topbar-contact" href="mailto:kmrprabhat@outlook.com">
-          Get in touch <span aria-hidden="true">↗</span>
-        </a>
+        <nav className="topbar-links" aria-label="Main navigation">
+          <a className="topbar-guide-link" href="#working-with-me">Working with me</a>
+          <a className="topbar-contact" href="mailto:kmrprabhat@outlook.com">
+            Get in touch <span aria-hidden="true">↗</span>
+          </a>
+        </nav>
       </header>
 
       <div className="portfolio-layout" id="top">
