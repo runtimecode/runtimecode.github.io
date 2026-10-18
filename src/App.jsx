@@ -6,7 +6,12 @@ import ArticlePage from "./articles/ArticlePage";
 import WorkingWithMe from "./WorkingWithMe";
 import GameOfLife from "./games/GameOfLife";
 import ProjectArchive from "./projects/ProjectArchive";
+import LearningAndSharing from "./learning/LearningAndSharing";
+import LearningAdmin from "./learning/LearningAdmin";
 import articles from "./articles/articles";
+import dsaContent from "./learning/DSA/dsa";
+import systemDesignContent from "./learning/Systemdesign/systemDesign";
+import lldContent from "./learning/LLD/lld";
 import projects, { sortProjectsNewestFirst } from "./projects/projects";
 import {
   mergeArticleOverrides,
@@ -14,6 +19,11 @@ import {
   saveArticleOverrides,
   sortArticlesNewestFirst,
 } from "./articles/articleStorage";
+import {
+  mergeLearningContent,
+  readLearningOverrides,
+  saveLearningOverrides,
+} from "./learning/learningStorage";
 
 const experience = [
   {
@@ -171,8 +181,20 @@ function App() {
   const [expandedExperiences, setExpandedExperiences] = useState({});
   const [currentHash, setCurrentHash] = useState(window.location.hash);
   const [articleStorage, setArticleStorage] = useState(readArticleOverrides);
+  const [learningStorage, setLearningStorage] = useState(readLearningOverrides);
   const showArticleAdmin = isLocalhost();
   const sortedProjects = sortProjectsNewestFirst(projects);
+  const baseLearningContent = {
+    dsa: dsaContent,
+    "system-design": systemDesignContent,
+    lld: lldContent,
+  };
+  const learningContentByTopic = Object.fromEntries(
+    Object.entries(baseLearningContent).map(([topic, content]) => [
+      topic,
+      mergeLearningContent(topic, content, learningStorage.overrides),
+    ])
+  );
   const allArticles = sortArticlesNewestFirst(
     mergeArticleOverrides(articles, articleStorage.overrides)
   );
@@ -193,8 +215,12 @@ function App() {
       currentHash === "#article-admin" ||
       currentHash === "#articles" ||
       currentHash === "#projects" ||
+      currentHash === "#learning-sharing" ||
+      currentHash.startsWith("#learning-sharing/") ||
+      currentHash === "#learning-admin" ||
       currentHash.startsWith("#/articles/") ||
-      currentHash.startsWith("#/projects/")
+      currentHash.startsWith("#/projects/") ||
+      currentHash.startsWith("#/learning/")
     ) {
       window.scrollTo(0, 0);
     } else if (currentHash === "#article-ideas") {
@@ -204,6 +230,59 @@ function App() {
 
   if (currentHash === "#working-with-me") {
     return <WorkingWithMe />;
+  }
+
+  if (currentHash === "#learning-sharing") {
+    return (
+      <LearningAndSharing
+        contentByTopic={learningContentByTopic}
+        showManageButton={showArticleAdmin}
+      />
+    );
+  }
+
+  if (currentHash.startsWith("#learning-sharing/")) {
+    const topicSlug = currentHash.slice("#learning-sharing/".length);
+    return (
+      <LearningAndSharing
+        contentByTopic={learningContentByTopic}
+        showManageButton={showArticleAdmin}
+        topicSlug={topicSlug}
+      />
+    );
+  }
+
+  if (currentHash === "#learning-admin" && showArticleAdmin) {
+    return (
+      <LearningAdmin
+        contentByTopic={learningContentByTopic}
+        onSave={(overrides) => {
+          const error = saveLearningOverrides(overrides);
+          if (error) {
+            setLearningStorage((current) => ({ ...current, error }));
+            return error;
+          }
+          setLearningStorage({ overrides, error: "" });
+          return "";
+        }}
+        overrides={learningStorage.overrides}
+        storageError={learningStorage.error}
+      />
+    );
+  }
+
+  if (currentHash.startsWith("#/learning/")) {
+    const [, , topicSlug, contentSlug] = currentHash.split("/");
+    if (baseLearningContent[topicSlug]) {
+      return (
+        <LearningAndSharing
+          contentByTopic={learningContentByTopic}
+          contentSlug={contentSlug}
+          showManageButton={showArticleAdmin}
+          topicSlug={topicSlug}
+        />
+      );
+    }
   }
 
   if (currentHash === "#article-admin" && showArticleAdmin) {
@@ -297,6 +376,9 @@ function App() {
               </a>
               <a className="profile-secondary-link" href="#experience">
                 Explore experience
+              </a>
+              <a className="profile-secondary-link" href="#learning-sharing">
+                Learning &amp; sharing
               </a>
             </div>
           </section>
