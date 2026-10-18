@@ -1,3 +1,5 @@
+import TopbarSocialLinks from "../TopbarSocialLinks";
+
 function ProjectArchive({ projects }) {
   return (
     <div className="portfolio-shell project-archive-page">
@@ -6,9 +8,7 @@ function ProjectArchive({ projects }) {
         <nav className="topbar-links" aria-label="Main navigation">
           <a className="article-nav-link" href="#top">Homepage</a>
           <a className="topbar-guide-link" href="#working-with-me">Working with me</a>
-          <a className="topbar-contact" href="mailto:kmrprabhat@outlook.com">
-            Get in touch <span aria-hidden="true">↗</span>
-          </a>
+          <TopbarSocialLinks />
         </nav>
       </header>
 

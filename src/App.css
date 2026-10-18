@@ -505,8 +505,7 @@ body {
 }
 
 .site-wordmark,
-.topbar-guide-link,
-.topbar-contact {
+.topbar-guide-link {
   color: var(--portfolio-ink);
   font-size: 0.9rem;
   font-weight: 700;
@@ -521,11 +520,39 @@ body {
   font-weight: 500;
 }
 
-.topbar-contact span,
 .profile-primary-link span,
 .contact-panel a span {
   color: var(--portfolio-accent);
   margin-left: 5px;
+}
+
+.topbar-social-links {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.topbar-social-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--portfolio-line);
+  border-radius: 50%;
+  color: var(--portfolio-ink);
+  font-size: 1rem;
+  transition: background-color 140ms ease, color 140ms ease;
+}
+
+.topbar-social-links a:hover {
+  background: var(--portfolio-ink);
+  color: #fff;
+}
+
+.topbar-social-links a:focus-visible {
+  outline: 2px solid var(--portfolio-accent);
+  outline-offset: 3px;
 }
 
 .portfolio-layout {
@@ -1967,7 +1994,6 @@ body {
 }
 
 .site-wordmark:focus-visible,
-.topbar-contact:focus-visible,
 .profile-primary-link:focus-visible,
 .profile-secondary-link:focus-visible,
 .contact-panel a:focus-visible {
@@ -2466,8 +2492,7 @@ body {
 
   .site-topbar { margin-bottom: 14px; }
   .topbar-links { gap: 14px; }
-  .topbar-guide-link,
-  .topbar-contact { font-size: 0.78rem; }
+  .topbar-guide-link { font-size: 0.78rem; }
   .portfolio-layout { grid-template-columns: 1fr; gap: 14px; }
   .site-wordmark { display: inline; }
   .main-column { grid-column: 1; }

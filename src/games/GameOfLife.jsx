@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import TopbarSocialLinks from "../TopbarSocialLinks";
 
 const DEFAULT_ROWS = 24;
 const DEFAULT_COLUMNS = 36;
@@ -133,9 +134,7 @@ function GameOfLife() {
         <nav className="topbar-links" aria-label="Main navigation">
           <a className="article-nav-link" href="#projects">All projects</a>
           <a className="topbar-guide-link" href="#working-with-me">Working with me</a>
-          <a className="topbar-contact" href="mailto:kmrprabhat@outlook.com">
-            Get in touch <span aria-hidden="true">↗</span>
-          </a>
+          <TopbarSocialLinks />
         </nav>
       </header>
 

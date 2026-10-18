@@ -1,11 +1,11 @@
+import TopbarSocialLinks from "./TopbarSocialLinks";
+
 function WorkingWithMe() {
   return (
     <div className="portfolio-shell working-with-me-page">
       <header className="site-topbar">
         <a className="site-wordmark" href="#top">Prabhat Kumar</a>
-        <a className="topbar-contact" href="mailto:kmrprabhat@outlook.com">
-          Get in touch <span aria-hidden="true">↗</span>
-        </a>
+        <TopbarSocialLinks />
       </header>
 
       <main className="working-with-me-content" id="top">

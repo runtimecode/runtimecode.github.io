@@ -1,4 +1,5 @@
 import { useState } from "react";
+import TopbarSocialLinks from "../TopbarSocialLinks";
 import { createLearningModule } from "./learningStorage";
 
 const topics = [
@@ -163,6 +164,7 @@ function LearningAdmin({ contentByTopic, overrides, onSave, storageError }) {
         <nav className="topbar-links" aria-label="Main navigation">
           <a className="article-nav-link" href="#learning-sharing">Learning &amp; sharing</a>
           <a className="article-nav-link" href="#top">Homepage</a>
+          <TopbarSocialLinks />
         </nav>
       </header>
 

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import TopbarSocialLinks from "./TopbarSocialLinks";
 import ArticleAdmin from "./articles/ArticleAdmin";
 import ArticleArchive from "./articles/ArticleArchive";
 import ArticlePage from "./articles/ArticlePage";
@@ -342,9 +343,7 @@ function App() {
         <a className="site-wordmark" href="#top">Prabhat Kumar</a>
         <nav className="topbar-links" aria-label="Main navigation">
           <a className="topbar-guide-link" href="#working-with-me">Working with me</a>
-          <a className="topbar-contact" href="mailto:kmrprabhat@outlook.com">
-            Get in touch <span aria-hidden="true">↗</span>
-          </a>
+          <TopbarSocialLinks />
         </nav>
       </header>
 

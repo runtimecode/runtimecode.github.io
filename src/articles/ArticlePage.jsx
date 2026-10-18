@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import TopbarSocialLinks from "../TopbarSocialLinks";
 
 function getReadingTime(article) {
   const text = article.sections
@@ -58,9 +59,7 @@ function ArticlePage({ article, articles }) {
         <nav className="topbar-links" aria-label="Main navigation">
           <a className="article-nav-link" href="#articles">All articles</a>
           <a className="topbar-guide-link" href="#working-with-me">Working with me</a>
-          <a className="topbar-contact" href="mailto:kmrprabhat@outlook.com">
-            Get in touch <span aria-hidden="true">↗</span>
-          </a>
+          <TopbarSocialLinks />
         </nav>
       </header>
 

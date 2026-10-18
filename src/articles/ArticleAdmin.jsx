@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import TopbarSocialLinks from "../TopbarSocialLinks";
 import { createArticleModule } from "./articleStorage";
 
 function slugify(value) {
@@ -162,9 +163,7 @@ function ArticleAdmin({ articles, overrides, onSave, storageError }) {
         <a className="site-wordmark" href="#top">Prabhat Kumar</a>
         <nav className="topbar-links" aria-label="Main navigation">
           <a className="article-nav-link" href="#top">Homepage</a>
-          <a className="topbar-contact" href="mailto:kmrprabhat@outlook.com">
-            Get in touch <span aria-hidden="true">↗</span>
-          </a>
+          <TopbarSocialLinks />
         </nav>
       </header>
 
