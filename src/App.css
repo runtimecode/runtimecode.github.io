@@ -1398,6 +1398,13 @@ body {
   border-top: 1px solid var(--portfolio-line);
 }
 
+.game-grid-form-hint {
+  align-self: center;
+  margin: 0;
+  color: var(--portfolio-muted);
+  font-size: 0.72rem;
+}
+
 .game-grid-form label {
   display: grid;
   gap: 5px;
@@ -1446,13 +1453,16 @@ body {
   gap: 8px;
 }
 
-.game-range-control strong {
+.game-range-control output {
   color: var(--portfolio-ink);
+  font-weight: 700;
 }
 
 .game-range-control input {
   width: 100%;
+  min-height: 24px;
   accent-color: var(--portfolio-ink);
+  cursor: pointer;
 }
 
 .game-status {

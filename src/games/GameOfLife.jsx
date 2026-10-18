@@ -205,12 +205,18 @@ function GameOfLife() {
                 value={columnInput}
               />
             </label>
-            <button className="show-more-button" type="submit">Apply size</button>
+            <button className="show-more-button" type="submit">Update grid</button>
+            <p className="game-grid-form-hint">
+              Updating the grid resets the current pattern.
+            </p>
           </form>
 
           <div className="game-range-controls">
             <label className="game-range-control">
-              <span>Speed <strong>{speed} generations/sec</strong></span>
+              <span>
+                Speed
+                <output aria-live="polite">{speed} generations/sec</output>
+              </span>
               <input
                 max="20"
                 min="1"
@@ -220,7 +226,10 @@ function GameOfLife() {
               />
             </label>
             <label className="game-range-control">
-              <span>Random density <strong>{density}%</strong></span>
+              <span>
+                Random density
+                <output aria-live="polite">{density}%</output>
+              </span>
               <input
                 max="60"
                 min="5"
