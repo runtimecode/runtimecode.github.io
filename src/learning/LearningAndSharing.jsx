@@ -1,3 +1,5 @@
+import MermaidDiagram from "./MermaidDiagram";
+
 const sections = [
   {
     slug: "dsa",
@@ -121,13 +123,21 @@ function LearningAndSharing({
                 {selectedContent.codeSamples?.length > 0 && (
                   <div className="learning-code-list">
                     {selectedContent.codeSamples.map((sample) => (
-                      <section className="learning-code-block" key={sample.title}>
-                        <div>
-                          <h3>{sample.title}</h3>
-                          <span>{sample.language}</span>
-                        </div>
-                        <pre><code>{sample.code}</code></pre>
-                      </section>
+                      sample.language.toLowerCase() === "mermaid" ? (
+                        <MermaidDiagram
+                          key={sample.title}
+                          source={sample.code}
+                          title={sample.title}
+                        />
+                      ) : (
+                        <section className="learning-code-block" key={sample.title}>
+                          <div>
+                            <h3>{sample.title}</h3>
+                            <span>{sample.language}</span>
+                          </div>
+                          <pre><code>{sample.code}</code></pre>
+                        </section>
+                      )
                     ))}
                   </div>
                 )}

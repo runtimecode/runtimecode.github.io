@@ -49,7 +49,70 @@ const systemDesignContent = [
           "End-to-end encryption means services route ciphertext and cannot inspect content. Devices verify identity/key changes, and key distribution is an explicit subsystem. Encrypt metadata where feasible, minimize logs, protect backups, rate-limit account and message operations, and use generic push payloads. Abuse reporting may require a user-initiated client-side report flow because the service cannot routinely scan plaintext.\n\nA per-conversation ordering key simplifies client experience but can become hot for huge groups. Fan-out-on-write is fast for small groups; fan-out-on-read or hybrid delivery can control write amplification for large groups. Choose based on group-size distribution and latency goals.",
       },
     ],
-    codeSamples: [],
+    codeSamples: [
+      {
+        title: "High-level component interaction",
+        language: "mermaid",
+        code: `flowchart TB
+  subgraph clients["Clients"]
+    direction LR
+    sender["Sender client"]
+    recipient["Recipient client"]
+  end
+
+  subgraph edge["Connection layer"]
+    direction LR
+    gateway["Connection gateway"]
+    auth["Device authentication"]
+  end
+
+  subgraph services["Messaging services"]
+    direction LR
+    conversation["Conversation service"]
+    message["Message service"]
+    history["History sync service"]
+    receipt["Receipt processor"]
+  end
+
+  subgraph persistence["Durable storage"]
+    direction LR
+    store[("Message store")]
+    outbox[("Transactional outbox")]
+  end
+
+  subgraph delivery["Asynchronous delivery"]
+    direction LR
+    worker["Delivery workers"]
+    pending[("Offline delivery queue")]
+    push["Push notification adapter"]
+  end
+
+  subgraph mediaLayer["Media"]
+    media[("Object storage")]
+  end
+
+  sender -->|encrypted message| gateway
+  gateway --> auth
+  auth --> conversation
+  conversation -->|authorize and sequence| message
+  message -->|transaction| store
+  message --> outbox
+  outbox --> worker
+  worker -->|online recipient| gateway
+  worker -->|offline recipient| pending
+  pending -->|reconnect sync| gateway
+  worker --> push
+  push -->|generic wake-up| recipient
+  gateway -->|live encrypted payload| recipient
+  recipient -->|delivered/read receipt| gateway
+  gateway --> receipt
+  receipt --> store
+  sender -->|history sync by cursor| history
+  history --> store
+  sender -->|encrypted media upload| media
+  media -->|short-lived download grant| recipient`,
+      },
+    ],
   },
 ];
 

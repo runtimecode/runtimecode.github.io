@@ -2235,6 +2235,52 @@ body {
   tab-size: 2;
 }
 
+.learning-mermaid-diagram {
+  overflow-x: auto;
+  padding: 18px;
+  background: #fff;
+}
+
+.learning-mermaid-diagram svg {
+  display: block;
+  width: 100%;
+  min-width: 620px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.learning-mermaid-source {
+  border-top: 1px solid var(--portfolio-line);
+  background: #f7f7f7;
+}
+
+.learning-mermaid-source summary {
+  padding: 11px 15px;
+  color: #51554e;
+  font-size: 0.74rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.learning-mermaid-source pre {
+  overflow-x: auto;
+  margin: 0;
+  padding: 0 15px 15px;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.72rem;
+  line-height: 1.6;
+}
+
+.learning-mermaid-error {
+  margin: 0;
+  padding: 15px;
+  border-top: 1px solid #e3c4c4;
+  background: #fff4f4;
+  color: #842c2c;
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
 .learning-entry-updated {
   display: block;
   margin-top: 22px;
