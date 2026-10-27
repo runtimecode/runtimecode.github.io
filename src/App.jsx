@@ -7,6 +7,7 @@ import ArticlePage from "./articles/ArticlePage";
 import WorkingWithMe from "./WorkingWithMe";
 import GameOfLife from "./games/GameOfLife";
 import ProjectArchive from "./projects/ProjectArchive";
+import LatencyMonitor from "./projects/LatencyMonitor";
 import LearningAndSharing from "./learning/LearningAndSharing";
 import LearningAdmin from "./learning/LearningAdmin";
 import articles from "./articles/articles";
@@ -323,6 +324,9 @@ function App() {
     const project = sortedProjects.find((item) => item.slug === slug);
     if (project?.type === "game-of-life") {
       return <GameOfLife />;
+    }
+    if (project?.type === "latency-monitor") {
+      return <LatencyMonitor />;
     }
     return (
       <ProjectArchive

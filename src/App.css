@@ -1357,6 +1357,217 @@ body {
   margin-top: 2px;
 }
 
+.latency-monitor-page .site-topbar,
+.latency-monitor-content {
+  width: min(1080px, 100%);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.latency-monitor-content {
+  display: grid;
+  gap: 18px;
+}
+
+.latency-monitor-intro {
+  padding: 30px;
+  background: #ededed;
+}
+
+.latency-monitor-intro .article-breadcrumb {
+  margin-bottom: 22px;
+}
+
+.latency-monitor-intro h1 {
+  margin: 0;
+  font-family: Manrope, "Avenir Next", sans-serif;
+  font-size: clamp(1.9rem, 4vw, 2.7rem);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.2;
+}
+
+.latency-monitor-intro > p:not(.section-kicker) {
+  max-width: 720px;
+  margin: 12px 0 0;
+  color: #575b55;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.latency-overview {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.latency-overview h2,
+.latency-history-panel h2 {
+  margin: 0;
+  font-family: Manrope, "Avenir Next", sans-serif;
+  font-size: 1.15rem;
+}
+
+.latency-overview > div > p:last-child {
+  margin: 7px 0 0;
+  color: #62665f;
+  font-size: 0.78rem;
+  line-height: 1.6;
+}
+
+.latency-refresh-button {
+  min-height: 40px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 5px;
+  background: var(--portfolio-ink);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.latency-refresh-button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.latency-refresh-button:focus-visible {
+  outline: 2px solid var(--portfolio-accent);
+  outline-offset: 3px;
+}
+
+.latency-site-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.latency-speed-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.latency-speed-panel h2 {
+  margin: 0;
+  font-family: Manrope, "Avenir Next", sans-serif;
+  font-size: 1.4rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.latency-speed-panel > div > p:last-child {
+  max-width: 650px;
+  margin: 7px 0 0;
+  color: #62665f;
+  font-size: 0.78rem;
+  line-height: 1.6;
+}
+
+.latency-site-card {
+  min-width: 0;
+  padding: 18px;
+}
+
+.latency-site-heading {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.latency-site-heading h2 {
+  margin: 0;
+  font-family: Manrope, "Avenir Next", sans-serif;
+  font-size: 0.96rem;
+  font-weight: 700;
+}
+
+.latency-status-dot {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: #a4a8a1;
+}
+
+.latency-status-dot.is-reachable { background: #16834a; }
+.latency-status-dot.is-unreachable { background: #c64040; }
+
+.latency-status-label {
+  margin: 12px 0 2px;
+  color: #62665f;
+  font-size: 0.75rem;
+}
+
+.latency-value {
+  margin: 0;
+  font-family: Manrope, "Avenir Next", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+.latency-history-panel { min-width: 0; }
+.latency-history-panel .panel-heading { margin-bottom: 10px; }
+
+.latency-chart-scroll {
+  overflow-x: auto;
+}
+
+.latency-chart {
+  display: block;
+  width: 100%;
+  min-width: 560px;
+  overflow: visible;
+}
+
+.latency-chart text {
+  fill: #737770;
+  font-family: inherit;
+  font-size: 11px;
+}
+
+.latency-chart-gridline {
+  stroke: #e7e8e4;
+  stroke-width: 1;
+}
+
+.latency-chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px 18px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.latency-chart-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #62665f;
+  font-size: 0.73rem;
+}
+
+.latency-legend-swatch {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.latency-chart-empty,
+.latency-monitor-note {
+  color: #62665f;
+  font-size: 0.78rem;
+  line-height: 1.7;
+}
+
+.latency-chart-empty { margin: 18px 0 8px; }
+.latency-monitor-note { padding: 0 4px; }
+
 .project-preview-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2476,6 +2687,8 @@ body {
   .article-archive-content { width: 100%; }
   .project-archive-page .site-topbar,
   .project-archive-content,
+  .latency-monitor-page .site-topbar,
+  .latency-monitor-content,
   .game-page .site-topbar,
   .game-content,
   .learning-sharing-page .site-topbar,
@@ -2541,6 +2754,10 @@ body {
   .learning-focus-block ul { grid-template-columns: 1fr; }
   .project-archive-list,
   .project-preview-list { grid-template-columns: 1fr; }
+  .latency-site-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .latency-monitor-intro { padding: 22px 18px; }
+  .latency-overview { align-items: flex-start; }
+  .latency-speed-panel { align-items: flex-start; }
   .game-range-controls { grid-template-columns: 1fr; }
   .game-primary-controls button { min-width: calc(50% - 5px); }
   .game-grid-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -2551,6 +2768,13 @@ body {
   .article-admin-form,
   .article-admin-list { padding: 18px 16px; }
   .article-admin-item { gap: 8px; }
+}
+
+@media (max-width: 420px) {
+  .latency-site-grid { grid-template-columns: 1fr; }
+  .latency-overview { flex-direction: column; }
+  .latency-speed-panel { flex-direction: column; }
+  .latency-refresh-button { width: 100%; }
 }
 
 @media (prefers-reduced-motion: reduce) {

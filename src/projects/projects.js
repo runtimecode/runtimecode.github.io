@@ -1,5 +1,14 @@
 const projects = [
   {
+    slug: "site-latency-monitor",
+    category: "Network diagnostics",
+    title: "Popular Site Latency Monitor",
+    summary:
+      "Compare live response-time estimates and reachability for popular sites, with a chart of recent checks.",
+    updatedAt: "2026-10-27",
+    type: "latency-monitor",
+  },
+  {
     slug: "conways-game-of-life",
     category: "Interactive simulation",
     title: "Conway's Game of Life",
