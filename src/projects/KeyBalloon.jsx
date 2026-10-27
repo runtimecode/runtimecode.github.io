@@ -28,13 +28,24 @@ function KeyBalloon() {
   const [lastNote, setLastNote] = useState(null);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const audioContext = useRef(null);
+  const balloonTimeouts = useRef(new Map());
   const nextId = useRef(0);
 
+  const removeBalloon = useCallback((id) => {
+    const timeoutId = balloonTimeouts.current.get(id);
+    if (timeoutId) window.clearTimeout(timeoutId);
+    balloonTimeouts.current.delete(id);
+    setBalloons((current) => current.filter((balloon) => balloon.id !== id));
+  }, []);
+
   useEffect(() => {
+    const timeouts = balloonTimeouts.current;
     const previousTitle = document.title;
     document.title = "Key Balloon Music | Prabhat Kumar";
     return () => {
       document.title = previousTitle;
+      timeouts.forEach((timeoutId) => window.clearTimeout(timeoutId));
+      timeouts.clear();
       if (audioContext.current) {
         audioContext.current.close();
         audioContext.current = null;
@@ -69,6 +80,7 @@ function KeyBalloon() {
 
     const id = nextId.current;
     nextId.current += 1;
+    const duration = 2.8 + Math.random() * 1.1;
     setLastNote(note);
     setBalloons((current) => [
       ...current.slice(-11),
@@ -78,16 +90,25 @@ function KeyBalloon() {
         color: balloonColors[Math.floor(Math.random() * balloonColors.length)],
         left: 7 + Math.random() * 86,
         drift: Math.round(Math.random() * 100 - 50),
-        duration: 2.8 + Math.random() * 1.1,
+        duration,
       },
     ]);
-  }, [soundEnabled]);
+    balloonTimeouts.current.set(
+      id,
+      window.setTimeout(() => removeBalloon(id), duration * 1000 + 100)
+    );
+  }, [removeBalloon, soundEnabled]);
+
+  function clearBalloons() {
+    balloonTimeouts.current.forEach((timeoutId) => window.clearTimeout(timeoutId));
+    balloonTimeouts.current.clear();
+    setBalloons([]);
+  }
 
   useEffect(() => {
     function handleKeyDown(event) {
       if (event.repeat || event.altKey || event.ctrlKey || event.metaKey) return;
-      const key = event.key.toUpperCase();
-      const note = notes.find((item) => item.key === key);
+      const note = notes.find((item) => item.key === event.key.toUpperCase());
       if (!note) return;
       event.preventDefault();
       playNote(note);
@@ -138,7 +159,7 @@ function KeyBalloon() {
               <button
                 type="button"
                 className="key-balloon-clear-button"
-                onClick={() => setBalloons([])}
+                onClick={clearBalloons}
                 disabled={balloons.length === 0}
               >
                 Clear balloons
@@ -167,11 +188,7 @@ function KeyBalloon() {
                   "--balloon-drift": `${balloon.drift}px`,
                   "--balloon-duration": `${balloon.duration}s`,
                 }}
-                onAnimationEnd={() =>
-                  setBalloons((current) =>
-                    current.filter((item) => item.id !== balloon.id)
-                  )
-                }
+                onAnimationEnd={() => removeBalloon(balloon.id)}
                 aria-hidden="true"
               >
                 <span>{balloon.key}</span>

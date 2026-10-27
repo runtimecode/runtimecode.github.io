@@ -1950,6 +1950,15 @@ body {
   .key-balloon-key { min-height: 106px; }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .key-balloon {
+    bottom: 20px;
+    opacity: 1;
+    animation: none;
+    transform: translateX(var(--balloon-drift));
+  }
+}
+
 .game-page .site-topbar,
 .game-content {
   width: min(1440px, 100%);
