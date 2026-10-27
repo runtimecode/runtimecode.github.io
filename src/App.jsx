@@ -8,6 +8,7 @@ import WorkingWithMe from "./WorkingWithMe";
 import GameOfLife from "./games/GameOfLife";
 import ProjectArchive from "./projects/ProjectArchive";
 import LatencyMonitor from "./projects/LatencyMonitor";
+import KeyBalloon from "./projects/KeyBalloon";
 import LearningAndSharing from "./learning/LearningAndSharing";
 import LearningAdmin from "./learning/LearningAdmin";
 import articles from "./articles/articles";
@@ -327,6 +328,9 @@ function App() {
     }
     if (project?.type === "latency-monitor") {
       return <LatencyMonitor />;
+    }
+    if (project?.type === "key-balloon") {
+      return <KeyBalloon />;
     }
     return (
       <ProjectArchive

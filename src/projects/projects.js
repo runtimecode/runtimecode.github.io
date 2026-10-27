@@ -1,5 +1,14 @@
 const projects = [
   {
+    slug: "key-balloon-music",
+    category: "Music & learning",
+    title: "Key Balloon Music",
+    summary:
+      "Press or tap letter keys to play musical notes, learn note names, and send colorful balloons floating up.",
+    updatedAt: "2026-10-27",
+    type: "key-balloon",
+  },
+  {
     slug: "site-latency-monitor",
     category: "Network diagnostics",
     title: "Popular Site Latency Monitor",
